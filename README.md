@@ -95,4 +95,4 @@ modify it under the same terms as Perl itself.
 
 ##SEE ALSO
 
-    perl(1), MIME::Base64(3pm).
+[MIME::Base64](https://metacpan.org/pod/MIME::Base64), [RFC-3548](https://tools.ietf.org/html/rfc3548#section-5)
