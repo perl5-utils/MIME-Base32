@@ -24,7 +24,7 @@ my $decoded = MIME::Base32::decode_rfc3548($encoded);
 ## DESCRIPTION
 This module is for encoding/decoding data much the way that [MIME::Base64](https://metacpan.org/pod/MIME::Base64) does.
 
-Prior to version 1.0, [MIME::Base32](https://github.com/genio/p5-mime-base32) used the older ```[0-9A-V]``` encoding and decoding methods. So, keeping with that, [MIME::Base32::encode](#encode) will be a synonym to [MIME::Base32::encode_09AV](#encode_09AV) and [MIME::Base32::decode](#encode) will be a synonym to [MIME::Base32::decode_09AV](#decode_09AV) unless you explicitly request [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by importing the module with ```use MIME::Base32 qw(RFC);```
+Prior to version 1.0, [MIME::Base32](https://github.com/genio/p5-mime-base32) used the older ```[0-9A-V]``` encoding and decoding methods. So, keeping with that, [MIME::Base32::encode](#encode) will be a synonym to [MIME::Base32::encode_09AV](#encode_09av) and [MIME::Base32::decode](#encode) will be a synonym to [MIME::Base32::decode_09AV](#decode_09av) unless you explicitly request [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by importing the module with ```use MIME::Base32 qw(RFC);```
 
 ## METHODS
 
@@ -34,7 +34,7 @@ Prior to version 1.0, [MIME::Base32](https://github.com/genio/p5-mime-base32) us
 my $string_or_binary_data = MIME::Base32::decode($encoded_data);
 ```
 
-Decode some encoded data back into a string of text or binary data.  By default, this is a synonym for [MIME::Base32::decode_09AV](#decode_09AV).
+Decode some encoded data back into a string of text or binary data.  By default, this is a synonym for [MIME::Base32::decode_09AV](#decode_09av).
 Change the default behavior to [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by using the module with ```use MIME::Base32 qw(RFC);```.
 
 ### decode_09AV
@@ -58,7 +58,7 @@ Decode some encoded data back into a string of text or binary data. This uses th
 my $encoded = MIME::Base32::encode("some string");
 ```
 
-Encode a string of text or binary data.  By default, this is a synonym for [MIME::Base32::encode_09AV](#encode_09AV).
+Encode a string of text or binary data.  By default, this is a synonym for [MIME::Base32::encode_09AV](#encode_09av).
 Change the default behavior to [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by
 using the module with ```use MIME::Base32 qw(RFC);```.
 
