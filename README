@@ -1,4 +1,4 @@
-NAME
+# MIME::Base32 [![Build Status](https://travis-ci.org/genio/p5-mime-base32.svg?branch=master)](https://travis-ci.org/genio/p5-mime-base32)
 
     MIME::Base32 - Base32 encoder / decoder
 
