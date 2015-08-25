@@ -81,8 +81,7 @@ Encode a string of text or binary data. This uses the ```[A-Z2-7]``` [RFC-3548 C
 
 ## AUTHOR
 
-Daniel Peder, sponsored by [Infoset s.r.o.](http://www.infoset.com), Czech Republic
-<Daniel.Peder@InfoSet.COM> [Infoset s.r.o.](http://www.infoset.com)
+Daniel Peder <Daniel.Peder@InfoSet.COM>, sponsored by [Infoset s.r.o.](http://www.infoset.com), Czech Republic
 
 Chase Whitener <cwhitener@gmail.com>
 
