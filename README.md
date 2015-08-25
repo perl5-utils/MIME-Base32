@@ -24,7 +24,7 @@ my $decoded = MIME::Base32::decode_rfc3548($encoded);
 ## DESCRIPTION
 This module is for encoding/decoding data much the way that [MIME::Base64](https://metacpan.org/pod/MIME::Base64) does.
 
-Prior to version 1.0, [MIME::Base32](https://github.com/genio/p5-mime-base32) used the older ```[0-9A-V]``` encoding and decoding methods. So, keeping with that, [MIME::Base32::encode](#encode) will be a synonym to [MIME::Base32::encode_09AV](#encode_09AV) unless you request [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by importing the module with ```use MIME::Base32 qw(RFC);```
+Prior to version 1.0, [MIME::Base32](https://github.com/genio/p5-mime-base32) used the older ```[0-9A-V]``` encoding and decoding methods. So, keeping with that, [MIME::Base32::encode](#encode) will be a synonym to [MIME::Base32::encode_09AV](#encode_09AV) and [MIME::Base32::decode](#encode) will be a synonym to [MIME::Base32::decode_09AV](#decode_09AV) unless you explicitly request [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by importing the module with ```use MIME::Base32 qw(RFC);```
 
 ## METHODS
 

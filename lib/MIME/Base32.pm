@@ -132,7 +132,8 @@ This module is for encoding/decoding data much the way that L<MIME::Base64> does
 
 Prior to version 1.0, L<MIME::Base32> used the older C<[0-9A-V]> encoding and
 decoding methods. So, keeping with that, L<MIME::Base32::encode> will be a synonym
-to L<MIME::Base32::encode_09AV> unless you request L<RFC-3548 Compliance|https://tools.ietf.org/html/rfc3548#section-5>
+to L<MIME::Base32::encode_09AV> and L<MIME::Base32::decode> will be a synonym
+to L<MIME::Base32::decode_09AV> unless you explicitly request L<RFC-3548 Compliance|https://tools.ietf.org/html/rfc3548#section-5>
 by importing the module with C<use MIME::Base32 qw(RFC);>.
 
 =head1 METHODS
