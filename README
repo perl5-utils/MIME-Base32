@@ -1,0 +1,46 @@
+NAME
+
+    MIME::Base32 - Base32 encoder / decoder
+
+SYNOPSIS
+
+      # RFC forces the [A-Z2-7] RFC-3548 compliant encoding 
+      # default encoding [0-9A-V] is for backward compatibility with pre v1.0
+      use MIME::Base32 qw( RFC ); 
+  
+      $encoded = MIME::Base32::encode($text_or_binary_data);
+      $decoded = MIME::Base32::decode($encoded);
+                                         
+DESCRIPTION
+
+    Encode data similar way like MIME::Base64 does.
+
+    Main purpose is to create encrypted text used as id or key entry
+    typed-or-submitted by user. It is upper/lowercase safe (not sensitive).
+
+EXPORT
+
+    ALLWAYS NOTHING
+
+AUTHOR
+
+    Daniel Peder, sponsored by Infoset s.r.o., Czech Republic
+    <Daniel.Peder@InfoSet.COM> http://www.infoset.com
+
+COPYRIGHT
+
+    Copyright (c) 2003-2010 Daniel Peder.  All rights reserved.
+
+    This library is free software; you can redistribute it and/or
+    modify it under the same terms as Perl itself.
+
+NOTE
+
+    Version 1.02 provides minor changes only:
+    - added COPYRIGHT according to FEDORA & DEBIAN community requests
+    - test.pl - extended test string (just for sure ;)
+
+SEE ALSO
+
+    perl(1), MIME::Base64(3pm).
+
