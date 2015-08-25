@@ -4,7 +4,7 @@ use 5.006;
 use strictures 2;
 
 our $VERSION = '1.03_001';
-eval $VERSION;
+$VERSION = eval $VERSION;
 
 sub import {
 	my( $pkg, $arg )=@_;
@@ -141,7 +141,7 @@ by importing the module with C<use MIME::Base32 qw(RFC);>.
 
 	my $string_or_binary_data = MIME::Base32::decode($encoded_data);
 
-Decode some encoded data back into a string of text or binary data.  By default, this is a synonym for L<MIME::Base32::decode09AV>.
+Decode some encoded data back into a string of text or binary data.  By default, this is a synonym for L<MIME::Base32::decode_09AV>.
 Change the default behavior to L<RFC-3548 Compliance|https://tools.ietf.org/html/rfc3548#section-5> by
 using the module with C<use MIME::Base32 qw(RFC)>.
 
@@ -161,7 +161,7 @@ Decode some encoded data back into a string of text or binary data. This uses th
 
 	my $encoded = MIME::Base32::encode("some string");
 
-Encode a string of text or binary data.  By default, this is a synonym for L<MIME::Base32::encode09AV>.
+Encode a string of text or binary data.  By default, this is a synonym for L<MIME::Base32::encode_09AV>.
 Change the default behavior to L<RFC-3548 Compliance|https://tools.ietf.org/html/rfc3548#section-5> by
 using the module with C<use MIME::Base32 qw(RFC)>.
 

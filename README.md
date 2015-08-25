@@ -1,45 +1,98 @@
 # MIME::Base32 [![Build Status](https://travis-ci.org/genio/p5-mime-base32.svg?branch=master)](https://travis-ci.org/genio/p5-mime-base32)
 
-    MIME::Base32 - Base32 encoder / decoder
+A Base32 encoder/decoder.
 
-SYNOPSIS
+## SYNOPSIS
+```perl
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use MIME::Base32;
 
-      # RFC forces the [A-Z2-7] RFC-3548 compliant encoding
-      # default encoding [0-9A-V] is for backward compatibility with pre v1.0
-      use MIME::Base32 qw( RFC );
+# the old 09AV standard for MIME::Base32 prior to version 1.0
+my $encoded_09AV = MIME::Base32::encode($text_or_binary_data);
+my $decoded_09AV = MIME::Base32::decode($encoded_09AV);
+# synonymous to:
+$encoded_09AV = MIME::Base32::encoded_09AV($text_or_binary_data);
+$decoded_09AV = MIME::Base32::decoded_09AV($encoded_09AV);
 
-      $encoded = MIME::Base32::encode($text_or_binary_data);
-      $decoded = MIME::Base32::decode($encoded);
+# the RFC3548 compliant way!
+my $encoded = MIME::Base32::encode_rfc3548($text_or_binary_data);
+my $decoded = MIME::Base32::decode_rfc3548($encoded);
+```
 
-DESCRIPTION
+## DESCRIPTION
+This module is for encoding/decoding data much the way that [MIME::Base64](https://metacpan.org/pod/MIME::Base64) does.
 
-    Encode data similar way like MIME::Base64 does.
+Prior to version 1.0, [MIME::Base32](https://github.com/genio/p5-mime-base32) used the older ```[0-9A-V]``` encoding and decoding methods. So, keeping with that, [MIME::Base32::encode](#encode) will be a synonym to [MIME::Base32::encode_09AV](#encode_09AV) unless you request [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by importing the module with ```use MIME::Base32 qw(RFC);```
 
-    Main purpose is to create encrypted text used as id or key entry
-    typed-or-submitted by user. It is upper/lowercase safe (not sensitive).
+## METHODS
 
-EXPORT
+### decode
 
-    NOTHING
+```perl
+my $string_or_binary_data = MIME::Base32::decode($encoded_data);
+```
 
-AUTHOR
+Decode some encoded data back into a string of text or binary data.  By default, this is a synonym for [MIME::Base32::decode_09AV](#decode_09AV).
+Change the default behavior to [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by using the module with ```use MIME::Base32 qw(RFC);```.
 
-    Daniel Peder, sponsored by Infoset s.r.o., Czech Republic
-    <Daniel.Peder@InfoSet.COM> http://www.infoset.com
+### decode_09AV
 
-COPYRIGHT
+```perl
+my $string_or_binary_data = MIME::Base32::decode_09AV($encoded_data);
+```
 
-    Copyright (c) 2003-2010 Daniel Peder.  All rights reserved.
+Decode some encoded data back into a string of text or binary data. This uses the ```[0-9A-V]``` method.
 
-    This library is free software; you can redistribute it and/or
-    modify it under the same terms as Perl itself.
+### decode_rfc3548
 
-NOTE
+```perl
+my $string_or_binary_data = MIME::Base32::decode_rfc3548($encoded_data);
+```
+Decode some encoded data back into a string of text or binary data. This uses the ```[A-Z2-7]``` [RFC-3548 Compliant](https://tools.ietf.org/html/rfc3548#section-5) method.
 
-    Version 1.02 provides minor changes only:
-    - added COPYRIGHT according to FEDORA & DEBIAN community requests
-    - test.pl - extended test string (just for sure ;)
+### encode
 
-SEE ALSO
+```perl
+my $encoded = MIME::Base32::encode("some string");
+```
+
+Encode a string of text or binary data.  By default, this is a synonym for [MIME::Base32::encode_09AV](#encode_09AV).
+Change the default behavior to [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by
+using the module with ```use MIME::Base32 qw(RFC);```.
+
+### encode_09AV
+
+```perl
+my $encoded = MIME::Base32::encode_09AV("some string");
+```
+
+Encode a string of text or binary data. This uses the ```[0-9A-V]``` method.
+
+### encode_rfc3548
+
+```perl
+my $encoded = MIME::Base32::encode_rfc3548("some string");
+```
+
+Encode a string of text or binary data. This uses the ```[A-Z2-7]``` [RFC-3548 Compliant](https://tools.ietf.org/html/rfc3548#section-5) method.
+
+
+## AUTHOR
+
+Daniel Peder, sponsored by [Infoset s.r.o.](http://www.infoset.com), Czech Republic
+<Daniel.Peder@InfoSet.COM> [Infoset s.r.o.](http://www.infoset.com)
+
+Chase Whitener <cwhitener@gmail.com>
+
+## COPYRIGHT AND LICENSE INFORMATION
+
+Copyright (c) 2003-2010 Daniel Peder.  All rights reserved.
+
+This library is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself.
+
+##SEE ALSO
 
     perl(1), MIME::Base64(3pm).
