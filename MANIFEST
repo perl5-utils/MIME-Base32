@@ -1,7 +1,11 @@
-Base32.pm
+lib/MIME/Base32.pm
+t/00-basic.t
+t/pod-coverage.t
+t/pod.t
+Changes
+INSTALL
+LICENSE
 Makefile.PL
-MANIFEST			This list of files
-META.yml
+MANIFEST
+MANIFEST.SKIP
 README
-test.pl
-test1.pl

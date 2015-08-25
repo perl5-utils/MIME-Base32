@@ -1,0 +1,17 @@
+MIME-Base32
+===========
+
+Created: 2015-08-22
+Home page: <https://metacpan.org/release/Alien-libuv>
+Bug tracker: <https://github.com/genio/p5-mime-base32/issues>
+Maintainer: Chase Whitener
+
+1.03	2015-08-24
+	- Updated the module to fit current release standards
+	- Added POD and POD-Coverage tests
+	- Combined test.pl and test1.pl into t/00-basic.t
+	- Closes https://rt.cpan.org/Ticket/Display.html?id=105711
+	- Closes https://rt.cpan.org/Ticket/Display.html?id=53173
+
+1.02	2010-08-25
+	- Version released to the CPAN
