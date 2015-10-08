@@ -1,89 +1,101 @@
 # MIME::Base32 [![Build Status](https://travis-ci.org/genio/p5-mime-base32.svg?branch=master)](https://travis-ci.org/genio/p5-mime-base32)
 
-A Base32 encoder/decoder.
+Base32 encoder and decoder
 
 ## SYNOPSIS
+
 ```perl
 #!/usr/bin/env perl
 use strict;
 use warnings;
 use MIME::Base32;
 
-# the old 09AV standard for MIME::Base32 prior to version 1.0
-my $encoded_09AV = MIME::Base32::encode($text_or_binary_data);
-my $decoded_09AV = MIME::Base32::decode($encoded_09AV);
-# synonymous to:
-$encoded_09AV = MIME::Base32::encoded_09AV($text_or_binary_data);
-$decoded_09AV = MIME::Base32::decoded_09AV($encoded_09AV);
-
-# the RFC3548 compliant way!
-my $encoded = MIME::Base32::encode_rfc3548($text_or_binary_data);
-my $decoded = MIME::Base32::decode_rfc3548($encoded);
+my $encoded = encode_base32('Aladdin: open sesame');
+my $decoded = decode_base32($encoded);
 ```
 
 ## DESCRIPTION
+
 This module is for encoding/decoding data much the way that [MIME::Base64](https://metacpan.org/pod/MIME::Base64) does.
 
-Prior to version 1.0, [MIME::Base32](https://github.com/genio/p5-mime-base32) used the older ```[0-9A-V]``` encoding and decoding methods. So, keeping with that, [MIME::Base32::encode](#encode) will be a synonym to [MIME::Base32::encode_09AV](#encode_09av) and [MIME::Base32::decode](#encode) will be a synonym to [MIME::Base32::decode_09AV](#decode_09av) unless you explicitly request [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by importing the module with ```use MIME::Base32 qw(RFC);```
+Prior to version 1.0, [MIME::Base32](https://github.com/genio/p5-mime-base32) used the ```base32hex``` (or ```[0-9A-V]```) encoding and decoding methods by default. If you need to maintain that behavior, please call [encode_base32hex](#encode_base32hex) or [decode_base32hex](#decode_base32hex) functions directly.
 
-## METHODS
+Now, in accordance with [RFC-3548, Section 6](https://tools.ietf.org/html/rfc3548#section-6),
+[MIME::Base32](https://github.com/genio/p5-mime-base32) uses the [encode_base32](#encode_base32) and [decode_base32](#decode_base32) functions by default.
+
+Many synonyms to each function remain due to this change.
+
+## FUNCTIONS
+
+The following primary functions are provided:
 
 ### decode
 
-```perl
-my $string_or_binary_data = MIME::Base32::decode($encoded_data);
-```
-
-Decode some encoded data back into a string of text or binary data.  By default, this is a synonym for [MIME::Base32::decode_09AV](#decode_09av).
-Change the default behavior to [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by using the module with ```use MIME::Base32 qw(RFC);```.
-
-### decode_09AV
-
-```perl
-my $string_or_binary_data = MIME::Base32::decode_09AV($encoded_data);
-```
-
-Decode some encoded data back into a string of text or binary data. This uses the ```[0-9A-V]``` method.
+Synonym for [decode_base32](#decode_base32)
 
 ### decode_rfc3548
 
+Synonym for [decode_base32](#decode_base32)
+
+### decode_base32
+
 ```perl
-my $string_or_binary_data = MIME::Base32::decode_rfc3548($encoded_data);
+my $string = decode_base32($encoded_data);
 ```
-Decode some encoded data back into a string of text or binary data. This uses the ```[A-Z2-7]``` [RFC-3548 Compliant](https://tools.ietf.org/html/rfc3548#section-5) method.
+
+Decode some encoded data back into a string of text or binary data.
+
+### decode_09AV
+
+Synonym for [decode_base32hex](#decode_base32hex)
+
+### decode_base32hex
+
+```perl
+my $string_or_binary_data = MIME::Base32::decode_base32hex($encoded_data);
+```
+
+Decode some encoded data back into a string of text or binary data.
 
 ### encode
 
-```perl
-my $encoded = MIME::Base32::encode("some string");
-```
-
-Encode a string of text or binary data.  By default, this is a synonym for [MIME::Base32::encode_09AV](#encode_09av).
-Change the default behavior to [RFC-3548 Compliance](https://tools.ietf.org/html/rfc3548#section-5) by
-using the module with ```use MIME::Base32 qw(RFC);```.
-
-### encode_09AV
-
-```perl
-my $encoded = MIME::Base32::encode_09AV("some string");
-```
-
-Encode a string of text or binary data. This uses the ```[0-9A-V]``` method.
+Synonym for [encode_base32](#encode_base32)
 
 ### encode_rfc3548
 
+Synonym for [encode_base32](#encode_base32)
+
+### encode_base32
+
 ```perl
-my $encoded = MIME::Base32::encode_rfc3548("some string");
+my $encoded = encode_base32("some string");
 ```
 
-Encode a string of text or binary data. This uses the ```[A-Z2-7]``` [RFC-3548 Compliant](https://tools.ietf.org/html/rfc3548#section-5) method.
+Encode a string of text or binary data.
 
+### encode_09AV
+
+Synonym for C<encode_base32hex>
+
+### encode_base32hex
+
+```perl
+my $encoded = MIME::Base32::encode_base32hex("some string");
+```
+
+Encode a string of text or binary data. This uses the ```hex``` (or ```[0-9A-V]```) method.
 
 ## AUTHOR
 
-Daniel Peder <Daniel.Peder@InfoSet.COM>, sponsored by [Infoset s.r.o.](http://www.infoset.com), Czech Republic
+Daniel Peder, sponsored by Infoset s.r.o., Czech Republic
+<Daniel.Peder@InfoSet.COM> http://www.infoset.com
 
 Chase Whitener <cwhitener@gmail.com>
+
+## BUGS
+
+Please report any bugs or feature requests on GitHub [issues](https://github.com/genio/p5-mime-base32/issues).
+Any and all criticism, bug reports, enhancements, fixes, etc. are appreciated.
 
 ## COPYRIGHT AND LICENSE INFORMATION
 
@@ -92,6 +104,6 @@ Copyright (c) 2003-2010 Daniel Peder.  All rights reserved.
 This library is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
 
-##SEE ALSO
+## SEE ALSO
 
-[MIME::Base64](https://metacpan.org/pod/MIME::Base64), [RFC-3548](https://tools.ietf.org/html/rfc3548#section-5)
+[MIME::Base64](https://metacpan.org/pod/MIME::Base64), [RFC-3548, section 6](https://tools.ietf.org/html/rfc3548#section-6)

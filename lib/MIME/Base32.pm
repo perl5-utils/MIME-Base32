@@ -3,102 +3,80 @@ package MIME::Base32;
 use 5.006;
 use strictures 2;
 
-our $VERSION = '1.03_001';
+require Exporter;
+our @ISA = qw(Exporter);
+our @EXPORT = qw(encode_base32 decode_base32);
+our @EXPORT_OK = qw(encode_rfc3548 decode_rfc3548 encode_09AV decode_09AV encode_base32hex decode_base32hex);
+
+our $VERSION = '1.04';
 $VERSION = eval $VERSION;
 
-sub import {
-	my( $pkg, $arg )=@_;
-	if( defined($arg) && $arg =~ /rfc|3548/i )
-	{
-		*encode = \&encode_rfc3548;
-		*decode = \&decode_rfc3548;
-	}
-	else
-	{
-		*encode = \&encode_09AV;
-		*decode = \&decode_09AV;
-	}
-}
+sub encode { return encode_base32(@_) }
+sub encode_rfc3548 { return encode_base32(@_) }
+sub encode_base32 {
+	my $arg = shift;
+	return '' unless defined($arg); # mimic MIME::Base64
 
-sub encode_rfc3548 {
-	# base32:
-	#
-	#  modified base64 algorithm with
-	#  32 characters set:  A - Z 2 - 7 compliant with: RFC-3548
-	#
-
-
-	$_ = shift @_;
-	my( $buffer, $l, $e );
-
-	$_=unpack('B*', $_);
-	s/(.....)/000$1/g;
-	$l=length;
+	$arg = unpack('B*', $arg);
+	$arg =~ s/(.....)/000$1/g;
+	my $l=length($arg);
 	if ($l & 7)
 	{
-		$e = substr($_, $l & ~7);
-		$_ = substr($_, 0, $l & ~7);
-		$_ .= "000$e" . '0' x (5 - length $e);
+		my $e = substr($arg, $l & ~7);
+		$arg = substr($arg, 0, $l & ~7);
+		$arg .= "000$e" . '0' x (5 - length $e);
 	}
-	$_=pack('B*', $_);
-	tr|\0-\37|A-Z2-7|;
-	$_;
+	$arg = pack('B*', $arg);
+	$arg =~ tr|\0-\37|A-Z2-7|;
+	return $arg;
 }
 
-sub decode_rfc3548 {
-	$_ = shift;
-	my( $l );
+sub decode {return decode_base32(@_) }
+sub decode_rfc3548 { return decode_base32(@_) }
+sub decode_base32 {
+	my $arg = shift;
+	return '' unless defined($arg); # mimic MIME::Base64
 
-	tr|A-Z2-7|\0-\37|;
-	$_=unpack('B*', $_);
-	s/000(.....)/$1/g;
-	$l=length;
-
-	# pouzije pouze platnou delku retezce
-	$_=substr($_, 0, $l & ~7) if $l & 7;
-
-	$_=pack('B*', $_);
+	$arg =~ tr|A-Z2-7|\0-\37|;
+	$arg = unpack('B*', $arg);
+	$arg =~ s/000(.....)/$1/g;
+	my $l = length $arg;
+	$arg = substr($arg, 0, $l & ~7) if $l & 7;
+	$arg = pack('B*', $arg);
+	return $arg;
 }
 
-sub encode_09AV {
+sub encode_09AV { return encode_base32hex(@_) }
+sub encode_base32hex {
+	my $arg = shift;
+	return '' unless defined($arg); # mimic MIME::Base64
 
-	# base32:
-	#
-	#  modified base64 algorithm with
-	#  32 characters set:  [0-9A-V] pre 1.00 backward compatibility
-	#
-
-
-	$_ = shift @_;
-	my( $buffer, $l, $e );
-
-	$_=unpack('B*', $_);
-	s/(.....)/000$1/g;
-	$l=length;
+	$arg = unpack('B*', $arg);
+	$arg =~ s/(.....)/000$1/g;
+	my $l = length($arg);
 	if ($l & 7)
 	{
-		$e = substr($_, $l & ~7);
-		$_ = substr($_, 0, $l & ~7);
-		$_ .= "000$e" . '0' x (5 - length $e);
+		my $e = substr($arg, $l & ~7);
+		$arg = substr($arg, 0, $l & ~7);
+		$arg .= "000$e" . '0' x (5 - length $e);
 	}
-	$_=pack('B*', $_);
-	tr|\0-\37|0-9A-V|;
-	$_;
+	$arg=pack('B*', $arg);
+	$arg =~ tr|\0-\37|0-9A-V|;
+	return $arg;
 }
 
-sub decode_09AV {
-	$_ = shift;
-	my( $l );
+sub decode_09AV { return decode_base32hex(@_) }
+sub decode_base32hex {
+	my $arg = shift;
+	return '' unless defined($arg); # mimic MIME::Base64
 
-	tr|0-9A-V|\0-\37|;
-	$_=unpack('B*', $_);
-	s/000(.....)/$1/g;
-	$l=length;
-
-	# pouzije pouze platnou delku retezce
-	$_=substr($_, 0, $l & ~7) if $l & 7;
-
-	$_=pack('B*', $_);
+	$arg =~ tr|0-9A-V|\0-\37|;
+	$arg = unpack('B*', $arg);
+	$arg =~ s/000(.....)/$1/g;
+	my $l = length($arg);
+	$arg=substr($arg, 0, $l & ~7) if $l & 7;
+	$arg=pack('B*', $arg);
+	return $arg;
 }
 1;
 
@@ -115,68 +93,71 @@ MIME::Base32 - Base32 encoder and decoder
 	use warnings;
 	use MIME::Base32;
 
-	# the old 09AV standard for MIME::Base32 prior to version 1.0
-	my $encoded_09AV = MIME::Base32::encode($text_or_binary_data);
-	my $decoded_09AV = MIME::Base32::decode($encoded_09AV);
-	# synonymous to:
-	$encoded_09AV = MIME::Base32::encoded_09AV($text_or_binary_data);
-	$decoded_09AV = MIME::Base32::decoded_09AV($encoded_09AV);
-
-	# the RFC3548 compliant way!
-	my $encoded = MIME::Base32::encode_rfc3548($text_or_binary_data);
-	my $decoded = MIME::Base32::decode_rfc3548($encoded);
+	my $encoded = encode_base32('Aladdin: open sesame');
+	my $decoded = decode_base32($encoded);
 
 =head1 DESCRIPTION
 
 This module is for encoding/decoding data much the way that L<MIME::Base64> does.
 
-Prior to version 1.0, L<MIME::Base32> used the older C<[0-9A-V]> encoding and
-decoding methods. So, keeping with that, L<MIME::Base32::encode> will be a synonym
-to L<MIME::Base32::encode_09AV> and L<MIME::Base32::decode> will be a synonym
-to L<MIME::Base32::decode_09AV> unless you explicitly request L<RFC-3548 Compliance|https://tools.ietf.org/html/rfc3548#section-5>
-by importing the module with C<use MIME::Base32 qw(RFC);>.
+Prior to version 1.0, L<MIME::Base32> used the C<base32hex> (or C<[0-9A-V]>) encoding and
+decoding methods by default. If you need to maintain that behavior, please call
+C<encode_base32hex> or C<decode_base32hex> functions directly.
 
-=head1 METHODS
+Now, in accordance with L<RFC-3548, Section 6|https://tools.ietf.org/html/rfc3548#section-6>,
+L<MIME::Base32> uses the C<encode_base32> and C<decode_base32> functions by default.
+
+=head1 FUNCTIONS
+
+The following primary functions are provided:
 
 =head2 decode
 
-	my $string_or_binary_data = MIME::Base32::decode($encoded_data);
-
-Decode some encoded data back into a string of text or binary data.  By default, this is a synonym for L<MIME::Base32::decode_09AV>.
-Change the default behavior to L<RFC-3548 Compliance|https://tools.ietf.org/html/rfc3548#section-5> by
-using the module with C<use MIME::Base32 qw(RFC)>.
-
-=head2 decode_09AV
-
-	my $string_or_binary_data = MIME::Base32::decode_09AV($encoded_data);
-
-Decode some encoded data back into a string of text or binary data. This uses the C<[0-9A-V]> method.
+Synonym for C<decode_base32>
 
 =head2 decode_rfc3548
 
-	my $string_or_binary_data = MIME::Base32::decode_rfc3548($encoded_data);
+Synonym for C<decode_base32>
 
-Decode some encoded data back into a string of text or binary data. This uses the C<[A-Z2-7]> L<RFC-3548 Compliant|https://tools.ietf.org/html/rfc3548#section-5> method.
+=head2 decode_base32
+
+	my $string = decode_base32($encoded_data);
+
+Decode some encoded data back into a string of text or binary data.
+
+=head2 decode_09AV
+
+Synonym for C<decode_base32hex>
+
+=head2 decode_base32hex
+
+	my $string_or_binary_data = MIME::Base32::decode_base32hex($encoded_data);
+
+Decode some encoded data back into a string of text or binary data.
 
 =head2 encode
 
-	my $encoded = MIME::Base32::encode("some string");
-
-Encode a string of text or binary data.  By default, this is a synonym for L<MIME::Base32::encode_09AV>.
-Change the default behavior to L<RFC-3548 Compliance|https://tools.ietf.org/html/rfc3548#section-5> by
-using the module with C<use MIME::Base32 qw(RFC)>.
-
-=head2 encode_09AV
-
-	my $encoded = MIME::Base32::encode_09AV("some string");
-
-Encode a string of text or binary data. This uses the C<[0-9A-V]> method.
+Synonym for C<encode_base32>
 
 =head2 encode_rfc3548
 
-	my $encoded = MIME::Base32::encode_rfc3548("some string");
+Synonym for C<encode_base32>
 
-Encode a string of text or binary data. This uses the C<[A-Z2-7]> L<RFC-3548 Compliant|https://tools.ietf.org/html/rfc3548#section-5> method.
+=head2 encode_base32
+
+	my $encoded = encode_base32("some string");
+
+Encode a string of text or binary data.
+
+=head2 encode_09AV
+
+Synonym for C<encode_base32hex>
+
+=head2 encode_base32hex
+
+	my $encoded = MIME::Base32::encode_base32hex("some string");
+
+Encode a string of text or binary data. This uses the C<hex> (or C<[0-9A-V]>) method.
 
 =head1 AUTHOR
 
@@ -199,6 +180,6 @@ modify it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<MIME::Base64>, L<RFC-3548|https://tools.ietf.org/html/rfc3548#section-5>
+L<MIME::Base64>, L<RFC-3548|https://tools.ietf.org/html/rfc3548#section-6>
 
 =cut

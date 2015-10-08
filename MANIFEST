@@ -1,5 +1,6 @@
 lib/MIME/Base32.pm
-t/00-basic.t
+t/00-base32.t
+t/01-base32hex.t
 t/pod-coverage.t
 t/pod.t
 Changes
