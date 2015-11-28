@@ -1,6 +1,5 @@
 ^meta/
 SciTE.properties
-README.md
 
 # Begin standard Module::Manifest::Skip list:
 
@@ -102,3 +101,6 @@ README.md
 ^[^/]+\.tar\.gz$
 
 # Added by Module::Package...
+
+# Github Markdown
+\.md$
