@@ -8,7 +8,7 @@ Send questions and discussion to makemaker@perl.org
 
 REQUIREMENTS
 
-    * Perl 5.10.0 or newer
+    * Perl 5.6 or newer
     * make
       * Windows can use nmake or dmake
         * Some Perls, such as Strawberry Perl, come with dmake

@@ -11,7 +11,7 @@ WriteMakefile(
 	VERSION_FROM => 'lib/MIME/Base32.pm',
 	ABSTRACT_FROM => 'lib/MIME/Base32.pm',
 	LICENSE => 'perl',
-	MIN_PERL_VERSION => 5.005,
+	MIN_PERL_VERSION => 5.006,
 	BUILD_REQUIRES => {
 		'FindBin' => 0,
 		'Test::More' => 0,
@@ -25,7 +25,7 @@ WriteMakefile(
 		'utf8' => 0,
 	},
 	META_MERGE => {
-		requires  => {perl => '5.005'},
+		requires  => {perl => '5.006'},
 		resources => {
 			license	=> 'perl',
 			homepage => 'https://github.com/genio/p5-mime-base32',
