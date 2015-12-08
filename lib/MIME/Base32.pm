@@ -8,7 +8,7 @@ our @ISA = qw(Exporter);
 our @EXPORT = qw(encode_base32 decode_base32);
 our @EXPORT_OK = qw(encode_rfc3548 decode_rfc3548 encode_09AV decode_09AV encode_base32hex decode_base32hex);
 
-our $VERSION = "1.04_001";
+our $VERSION = "1.03_001";
 $VERSION = eval $VERSION;
 
 sub encode { return encode_base32(@_) }
