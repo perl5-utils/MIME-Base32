@@ -1,4 +1,4 @@
-use 5.006;
+use 5.008001;
 use strict;
 use warnings;
 use ExtUtils::MakeMaker;
@@ -11,10 +11,10 @@ WriteMakefile(
 	VERSION_FROM => 'lib/MIME/Base32.pm',
 	ABSTRACT_FROM => 'lib/MIME/Base32.pm',
 	LICENSE => 'perl',
-	MIN_PERL_VERSION => 5.006,
+	MIN_PERL_VERSION => 5.008001,
 	BUILD_REQUIRES => {
 		'FindBin' => 0,
-		'Test::More' => 0,
+		'Test::More' => 0.88,
 		'Test::Pod' => 0,
 		'Test::Pod::Coverage' => 0,
 	},
@@ -25,7 +25,7 @@ WriteMakefile(
 		'utf8' => 0,
 	},
 	META_MERGE => {
-		requires  => {perl => '5.006'},
+		requires  => {perl => '5.008001'},
 		resources => {
 			license	=> 'perl',
 			homepage => 'https://github.com/genio/p5-mime-base32',

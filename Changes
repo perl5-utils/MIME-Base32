@@ -1,13 +1,8 @@
 MIME-Base32
 ===========
 
-Created: 2015-08-22
-Home page: <https://metacpan.org/release/Alien-libuv>
-Bug tracker: <https://github.com/genio/p5-mime-base32/issues>
-Maintainer: Chase Whitener
-
-1.04_001  2015-11-28
-	- Fixed a few minor things to prepare for an unofficial dev release
+1.04    2015-12-07
+	- Fixed a few minor things to prepare for an unofficial release
 
 1.03	2015-08-24
 	- Updated the module to fit current release standards
