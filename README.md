@@ -75,7 +75,7 @@ Encode a string of text or binary data.
 
 ### encode_09AV
 
-Synonym for C<encode_base32hex>
+Synonym for [encode_base32hex](#encode_base32hex)
 
 ### encode_base32hex
 
