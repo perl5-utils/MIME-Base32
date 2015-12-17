@@ -4,79 +4,84 @@ use 5.008001;
 use strictures 2;
 
 require Exporter;
-our @ISA = qw(Exporter);
-our @EXPORT = qw(encode_base32 decode_base32);
-our @EXPORT_OK = qw(encode_rfc3548 decode_rfc3548 encode_09AV decode_09AV encode_base32hex decode_base32hex);
+our @ISA       = qw(Exporter);
+our @EXPORT    = qw(encode_base32 decode_base32);
+our @EXPORT_OK = qw(
+    encode_rfc3548 decode_rfc3548 encode_09AV decode_09AV
+    encode_base32hex decode_base32hex
+);
 
 our $VERSION = "1.03_001";
 $VERSION = eval $VERSION;
 
-sub encode { return encode_base32(@_) }
+sub encode         { return encode_base32(@_) }
 sub encode_rfc3548 { return encode_base32(@_) }
-sub encode_base32 {
-	my $arg = shift;
-	return '' unless defined($arg); # mimic MIME::Base64
 
-	$arg = unpack('B*', $arg);
-	$arg =~ s/(.....)/000$1/g;
-	my $l=length($arg);
-	if ($l & 7)
-	{
-		my $e = substr($arg, $l & ~7);
-		$arg = substr($arg, 0, $l & ~7);
-		$arg .= "000$e" . '0' x (5 - length $e);
-	}
-	$arg = pack('B*', $arg);
-	$arg =~ tr|\0-\37|A-Z2-7|;
-	return $arg;
+sub encode_base32 {
+    my $arg = shift;
+    return '' unless defined($arg);    # mimic MIME::Base64
+
+    $arg = unpack('B*', $arg);
+    $arg =~ s/(.....)/000$1/g;
+    my $l = length($arg);
+    if ($l & 7) {
+        my $e = substr($arg, $l & ~7);
+        $arg = substr($arg, 0, $l & ~7);
+        $arg .= "000$e" . '0' x (5 - length $e);
+    }
+    $arg = pack('B*', $arg);
+    $arg =~ tr|\0-\37|A-Z2-7|;
+    return $arg;
 }
 
-sub decode {return decode_base32(@_) }
+sub decode         { return decode_base32(@_) }
 sub decode_rfc3548 { return decode_base32(@_) }
-sub decode_base32 {
-	my $arg = shift;
-	return '' unless defined($arg); # mimic MIME::Base64
 
-	$arg =~ tr|A-Z2-7|\0-\37|;
-	$arg = unpack('B*', $arg);
-	$arg =~ s/000(.....)/$1/g;
-	my $l = length $arg;
-	$arg = substr($arg, 0, $l & ~7) if $l & 7;
-	$arg = pack('B*', $arg);
-	return $arg;
+sub decode_base32 {
+    my $arg = shift;
+    return '' unless defined($arg);    # mimic MIME::Base64
+
+    $arg =~ tr|A-Z2-7|\0-\37|;
+    $arg = unpack('B*', $arg);
+    $arg =~ s/000(.....)/$1/g;
+    my $l = length $arg;
+    $arg = substr($arg, 0, $l & ~7) if $l & 7;
+    $arg = pack('B*', $arg);
+    return $arg;
 }
 
 sub encode_09AV { return encode_base32hex(@_) }
-sub encode_base32hex {
-	my $arg = shift;
-	return '' unless defined($arg); # mimic MIME::Base64
 
-	$arg = unpack('B*', $arg);
-	$arg =~ s/(.....)/000$1/g;
-	my $l = length($arg);
-	if ($l & 7)
-	{
-		my $e = substr($arg, $l & ~7);
-		$arg = substr($arg, 0, $l & ~7);
-		$arg .= "000$e" . '0' x (5 - length $e);
-	}
-	$arg = pack('B*', $arg);
-	$arg =~ tr|\0-\37|0-9A-V|;
-	return $arg;
+sub encode_base32hex {
+    my $arg = shift;
+    return '' unless defined($arg);    # mimic MIME::Base64
+
+    $arg = unpack('B*', $arg);
+    $arg =~ s/(.....)/000$1/g;
+    my $l = length($arg);
+    if ($l & 7) {
+        my $e = substr($arg, $l & ~7);
+        $arg = substr($arg, 0, $l & ~7);
+        $arg .= "000$e" . '0' x (5 - length $e);
+    }
+    $arg = pack('B*', $arg);
+    $arg =~ tr|\0-\37|0-9A-V|;
+    return $arg;
 }
 
 sub decode_09AV { return decode_base32hex(@_) }
-sub decode_base32hex {
-	my $arg = shift;
-	return '' unless defined($arg); # mimic MIME::Base64
 
-	$arg =~ tr|0-9A-V|\0-\37|;
-	$arg = unpack('B*', $arg);
-	$arg =~ s/000(.....)/$1/g;
-	my $l = length($arg);
-	$arg = substr($arg, 0, $l & ~7) if $l & 7;
-	$arg = pack('B*', $arg);
-	return $arg;
+sub decode_base32hex {
+    my $arg = shift;
+    return '' unless defined($arg);    # mimic MIME::Base64
+
+    $arg =~ tr|0-9A-V|\0-\37|;
+    $arg = unpack('B*', $arg);
+    $arg =~ s/000(.....)/$1/g;
+    my $l = length($arg);
+    $arg = substr($arg, 0, $l & ~7) if $l & 7;
+    $arg = pack('B*', $arg);
+    return $arg;
 }
 1;
 
@@ -88,13 +93,13 @@ MIME::Base32 - Base32 encoder and decoder
 
 =head1 SYNOPSIS
 
-	#!/usr/bin/env perl
-	use strict;
-	use warnings;
-	use MIME::Base32;
+    #!/usr/bin/env perl
+    use strict;
+    use warnings;
+    use MIME::Base32;
 
-	my $encoded = encode_base32('Aladdin: open sesame');
-	my $decoded = decode_base32($encoded);
+    my $encoded = encode_base32('Aladdin: open sesame');
+    my $decoded = decode_base32($encoded);
 
 =head1 DESCRIPTION
 
@@ -121,7 +126,7 @@ Synonym for C<decode_base32>
 
 =head2 decode_base32
 
-	my $string = decode_base32($encoded_data);
+    my $string = decode_base32($encoded_data);
 
 Decode some encoded data back into a string of text or binary data.
 
@@ -131,7 +136,7 @@ Synonym for C<decode_base32hex>
 
 =head2 decode_base32hex
 
-	my $string_or_binary_data = MIME::Base32::decode_base32hex($encoded_data);
+    my $string_or_binary_data = MIME::Base32::decode_base32hex($encoded_data);
 
 Decode some encoded data back into a string of text or binary data.
 
@@ -145,7 +150,7 @@ Synonym for C<encode_base32>
 
 =head2 encode_base32
 
-	my $encoded = encode_base32("some string");
+    my $encoded = encode_base32("some string");
 
 Encode a string of text or binary data.
 
@@ -155,7 +160,7 @@ Synonym for C<encode_base32hex>
 
 =head2 encode_base32hex
 
-	my $encoded = MIME::Base32::encode_base32hex("some string");
+    my $encoded = MIME::Base32::encode_base32hex("some string");
 
 Encode a string of text or binary data. This uses the C<hex> (or C<[0-9A-V]>) method.
 
