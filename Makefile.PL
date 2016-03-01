@@ -24,7 +24,7 @@ WriteMakefile1(
         resources   => {
             homepage   => 'https://metacpan.org/release/MIME-Base32',
             repository => {
-                url  => 'https://github.com:perl5-utils/MIME-Base32.git',
+                url  => 'https://github.com/perl5-utils/MIME-Base32.git',
                 web  => 'https://github.com/perl5-utils/MIME-Base32',
                 type => 'git',
             },

@@ -165,16 +165,18 @@ Synonym for C<encode_base32hex>
 
 Encode a string of text or binary data. This uses the C<hex> (or C<[0-9A-V]>) method.
 
-=head1 AUTHOR
+=head1 AUTHORS
 
-Daniel Peder, sponsored by Infoset s.r.o., Czech Republic
-<Daniel.Peder@InfoSet.COM> http://www.infoset.com
+Jens Rehsack - <rehsack@cpan.org> - Current maintainer
 
-Chase Whitener <cwhitener@gmail.com>
+Chase Whitener
+
+Daniel Peder - sponsored by Infoset s.r.o., Czech Republic
+ - <Daniel.Peder@InfoSet.COM> http://www.infoset.com - Original author
 
 =head1 BUGS
 
-Please report any bugs or feature requests on GitHub L<https://github.com/genio/p5-mime-base32/issues>.
+Please report any bugs or feature requests on GitHub L<https://github.com/perl5-utils/MIME-Base32/issues>.
 Any and all criticism, bug reports, enhancements, fixes, etc. are appreciated.
 
 =head1 COPYRIGHT AND LICENSE INFORMATION

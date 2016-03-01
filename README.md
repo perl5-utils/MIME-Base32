@@ -18,10 +18,10 @@ my $decoded = decode_base32($encoded);
 
 This module is for encoding/decoding data much the way that [MIME::Base64](https://metacpan.org/pod/MIME::Base64) does.
 
-Prior to version 1.0, [MIME::Base32](https://github.com/genio/p5-mime-base32) used the ```base32hex``` (or ```[0-9A-V]```) encoding and decoding methods by default. If you need to maintain that behavior, please call [encode_base32hex](#encode_base32hex) or [decode_base32hex](#decode_base32hex) functions directly.
+Prior to version 1.0, [MIME::Base32](https://github.com/perl5-utils/MIME-Base32) used the ```base32hex``` (or ```[0-9A-V]```) encoding and decoding methods by default. If you need to maintain that behavior, please call [encode_base32hex](#encode_base32hex) or [decode_base32hex](#decode_base32hex) functions directly.
 
 Now, in accordance with [RFC-3548, Section 6](https://tools.ietf.org/html/rfc3548#section-6),
-[MIME::Base32](https://github.com/genio/p5-mime-base32) uses the [encode_base32](#encode_base32) and [decode_base32](#decode_base32) functions by default.
+[MIME::Base32](https://github.com/perl5-utils/MIME-Base32) uses the [encode_base32](#encode_base32) and [decode_base32](#decode_base32) functions by default.
 
 Many synonyms to each function remain due to this change.
 
@@ -85,16 +85,18 @@ my $encoded = MIME::Base32::encode_base32hex("some string");
 
 Encode a string of text or binary data. This uses the ```hex``` (or ```[0-9A-V]```) method.
 
-## AUTHOR
+## AUTHORS
 
-Daniel Peder, sponsored by Infoset s.r.o., Czech Republic
-<Daniel.Peder@InfoSet.COM> http://www.infoset.com
+Jens Rehsack - rehsack@cpan.org - Current maintainer
 
-Chase Whitener <cwhitener@gmail.com>
+Chase Whitener
+
+Daniel Peder - sponsored by Infoset s.r.o., Czech Republic
+ Daniel.Peder@InfoSet.COM http://www.infoset.com - Original author
 
 ## BUGS
 
-Please report any bugs or feature requests on GitHub [issues](https://github.com/genio/p5-mime-base32/issues).
+Please report any bugs or feature requests on GitHub [issues](https://github.com/perl5-utils/MIME-Base32/issues).
 Any and all criticism, bug reports, enhancements, fixes, etc. are appreciated.
 
 ## COPYRIGHT AND LICENSE INFORMATION
