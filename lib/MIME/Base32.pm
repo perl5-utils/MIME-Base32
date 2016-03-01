@@ -1,7 +1,8 @@
 package MIME::Base32;
 
 use 5.008001;
-use strictures 2;
+use strict;
+use warnings;
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -11,7 +12,7 @@ our @EXPORT_OK = qw(
     encode_base32hex decode_base32hex
 );
 
-our $VERSION = "1.03_001";
+our $VERSION = "1.300_001";
 $VERSION = eval $VERSION;
 
 sub encode         { return encode_base32(@_) }
