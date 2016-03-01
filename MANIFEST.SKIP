@@ -30,6 +30,7 @@ SciTE.properties
 \b.cvsignore\b
 \b_darcs\b
 \B\.git\b
+\B\.gitattributes\b
 \B\.gitignore\b
 \B\.gitmodules\b
 \B\.hg\b
@@ -99,6 +100,9 @@ SciTE.properties
 
 # Distribution tarballs
 ^[^/]+\.tar\.gz$
+
+# Travis CI
+.travis.yml
 
 # Added by Module::Package...
 
