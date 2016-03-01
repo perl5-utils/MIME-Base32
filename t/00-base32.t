@@ -2,9 +2,6 @@ use strict;
 use warnings;
 use Test::More;
 
-use FindBin;
-use lib "$FindBin::Bin/lib";
-
 BEGIN {
 	use_ok( 'MIME::Base32' ) || BAIL_OUT("Can't use MIME::Base32");
 }
