@@ -1,7 +1,7 @@
 MIME-Base32
 ===========
 
-1.300_001	2016-03-01
+1.300_001	2016-04-04
 	- Updated the module to fit current release standards
 	- Added POD and POD-Coverage tests
 	- Combined test.pl and test1.pl into t/00-basic.t
