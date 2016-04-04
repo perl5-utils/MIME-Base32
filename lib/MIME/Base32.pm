@@ -84,6 +84,7 @@ sub decode_base32hex {
     $arg = pack('B*', $arg);
     return $arg;
 }
+
 1;
 
 =encoding utf8
@@ -176,12 +177,49 @@ Daniel Peder - sponsored by Infoset s.r.o., Czech Republic
 
 =head1 BUGS
 
-Please report any bugs or feature requests on GitHub L<https://github.com/perl5-utils/MIME-Base32/issues>.
+Before reporting any new issue, bug or alike, please check
+L<https://rt.cpan.org/Dist/Display.html?Queue=MIME-Base32>,
+L<https://github.com/perl5-utils/MIME-Base32/issues> or
+L<https://github.com/perl5-utils/MIME-Base32/pulls>, respectively, whether
+the issue is already reported.
+
+Please report any bugs or feature requests to
+C<bug-mime-base32 at rt.cpan.org>, or through the web interface at
+L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MIME-Base32>. 
+I will be notified, and then you'll automatically be notified of progress
+on your bug as I make changes.
+
 Any and all criticism, bug reports, enhancements, fixes, etc. are appreciated.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc MIME::Base32
+
+You can also look for information at:
+
+=over 4
+
+=item * RT: CPAN's request tracker
+
+L<https://rt.cpan.org/Dist/Display.html?Name=MIME-Base32>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/MIME-Base32>
+
+=item * MetaCPAN
+
+L<https://metacpan.org/release/MIME-Base32>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE INFORMATION
 
 Copyright (c) 2003-2010 Daniel Peder.  All rights reserved.
+Copyright (c) 2015-2016 Chase Whitener.  All rights reserved.
+Copyright (c) 2016 Jens Rehsack.  All rights reserved.
 
 This library is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
