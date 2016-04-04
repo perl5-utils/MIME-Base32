@@ -13,8 +13,12 @@ Build.bat
 /META.yml
 /META.json
 /MYMETA.*
+MANIFEST
 nytprof.out
 /pm_to_blib
 *.o
 *.bs
+*.swp
+*.bak
+*.old
 /_eumm/
