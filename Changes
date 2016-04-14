@@ -1,6 +1,9 @@
 MIME-Base32
 ===========
 
+1.301	2016-04-14
+	- release 1.300_001 without further changes as 1.301
+
 1.300_001	2016-04-04
 	- Updated the module to fit current release standards
 	- Added POD and POD-Coverage tests
