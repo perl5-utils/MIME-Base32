@@ -3,7 +3,7 @@ use warnings;
 use Test::More;
 
 BEGIN {
-	use_ok( 'MIME::Base32' ) || BAIL_OUT("Can't use MIME::Base32");
+	use_ok( 'MIME::Base32', 'rfc' ) || BAIL_OUT("Can't use MIME::Base32");
 }
 can_ok('MIME::Base32', (
 	qw(encode decode),
@@ -22,11 +22,5 @@ is(MIME::Base32::decode_base32($encoded),$string, 'decode_base32: got the correc
 
 is(MIME::Base32::encode_rfc3548($string),$encoded, 'encode_rfc3548: got the correct response');
 is(MIME::Base32::decode_rfc3548($encoded),$string, 'decode_rfc3548: got the correct response');
-
-is(encode_base32(undef),'','encode_base32: undef passed');
-is(decode_base32(undef),'','decode_base32: undef passed');
-
-is(encode_base32(''),'','encode_base32: empty string passed');
-is(decode_base32(''),'','decode_base32: empty string passed');
 
 done_testing();

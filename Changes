@@ -1,6 +1,10 @@
 MIME-Base32
 ===========
 
+1.302	2016-04-16
+	- Revert to nothing exported.
+	- Revert to encode/decode being dependent upon the export options
+
 1.301	2016-04-14
 	- release 1.300_001 without further changes as 1.301
 

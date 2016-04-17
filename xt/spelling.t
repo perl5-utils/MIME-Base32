@@ -62,3 +62,6 @@ rehsackATcpan
 thusly
 uniq
 von
+infoset
+metacpan
+peder

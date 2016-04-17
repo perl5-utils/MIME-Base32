@@ -4,18 +4,21 @@ use 5.008001;
 use strict;
 use warnings;
 
-require Exporter;
-our @ISA       = qw(Exporter);
-our @EXPORT    = qw(encode_base32 decode_base32);
-our @EXPORT_OK = qw(
-    encode_rfc3548 decode_rfc3548 encode_09AV decode_09AV
-    encode_base32hex decode_base32hex
-);
-
-our $VERSION = "1.301";
+our $VERSION = "1.302";
 $VERSION = eval $VERSION;
 
-sub encode         { return encode_base32(@_) }
+sub import {
+    my ($pkg, $arg) = @_;
+    if (defined($arg) && $arg =~ /rfc|3548/i) {
+        *encode = \&encode_base32;
+        *decode = \&decode_base32;
+    }
+    else {
+        *encode = \&encode_base32hex;
+        *decode = \&decode_base32hex;
+    }
+}
+
 sub encode_rfc3548 { return encode_base32(@_) }
 
 sub encode_base32 {
@@ -35,7 +38,6 @@ sub encode_base32 {
     return $arg;
 }
 
-sub decode         { return decode_base32(@_) }
 sub decode_rfc3548 { return decode_base32(@_) }
 
 sub decode_base32 {
@@ -70,6 +72,7 @@ sub encode_base32hex {
     return $arg;
 }
 
+
 sub decode_09AV { return decode_base32hex(@_) }
 
 sub decode_base32hex {
@@ -100,15 +103,32 @@ MIME::Base32 - Base32 encoder and decoder
     use warnings;
     use MIME::Base32;
 
-    my $encoded = encode_base32('Aladdin: open sesame');
-    my $decoded = decode_base32($encoded);
+    # base32 encode and decode
+    my $encoded = MIME::Base32::encode_base32('Aladdin: open sesame');
+    my $decoded = MIME::Base32::decode_base32($encoded);
+
+    # base32hex encode and decode
+    my $enhex = MIME::Base32::encode_base32hex('Aladdin: open sesame');
+    my $dehex = MIME::Base32::decode_base32hex($enhex);
+    # with nothing to import, we get these short synonyms for the hex functions
+    $enhex = MIME::Base32::encode('Aladdin: open sesame');
+    $dehex = MIME::Base32::decode($enhex);
+
+    # To change the default encode/decode functions to call the non-hex
+    # functions, you must use MIME::Base32 like this:
+
+    use MIME::Base32 qw(RFC-3548);
+    my $encoded = MIME::Base32::encode('Aladdin: open sesame');
+    my $decoded = MIME::Base32::decode($encoded);
+    $encoded = MIME::Base32::encode_base32('Aladdin: open sesame');
+    $decoded = MIME::Base32::decode($encoded);
 
 =head1 DESCRIPTION
 
 This module is for encoding/decoding data much the way that L<MIME::Base64> does.
 
 Prior to version 1.0, L<MIME::Base32> used the C<base32hex> (or C<[0-9A-V]>) encoding and
-decoding methods by default. If you need to maintain that behavior, please call
+decoding methods by default. Instead of relying on that behavior, please call
 C<encode_base32hex> or C<decode_base32hex> functions directly.
 
 Now, in accordance with L<RFC-3548, Section 6|https://tools.ietf.org/html/rfc3548#section-6>,
@@ -117,10 +137,6 @@ L<MIME::Base32> uses the C<encode_base32> and C<decode_base32> functions by defa
 =head1 FUNCTIONS
 
 The following primary functions are provided:
-
-=head2 decode
-
-Synonym for C<decode_base32>
 
 =head2 decode_rfc3548
 
@@ -141,10 +157,6 @@ Synonym for C<decode_base32hex>
     my $string_or_binary_data = MIME::Base32::decode_base32hex($encoded_data);
 
 Decode some encoded data back into a string of text or binary data.
-
-=head2 encode
-
-Synonym for C<encode_base32>
 
 =head2 encode_rfc3548
 
@@ -185,7 +197,7 @@ the issue is already reported.
 
 Please report any bugs or feature requests to
 C<bug-mime-base32 at rt.cpan.org>, or through the web interface at
-L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MIME-Base32>. 
+L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MIME-Base32>.
 I will be notified, and then you'll automatically be notified of progress
 on your bug as I make changes.
 
