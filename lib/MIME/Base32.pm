@@ -39,8 +39,7 @@ sub decode         { return decode_base32(@_) }
 sub decode_rfc3548 { return decode_base32(@_) }
 
 sub decode_base32 {
-    my $arg = shift;
-    return '' unless defined($arg);    # mimic MIME::Base64
+    my $arg = uc(shift || '');    # mimic MIME::Base64
 
     $arg =~ tr|A-Z2-7|\0-\37|;
     $arg = unpack('B*', $arg);
@@ -73,8 +72,7 @@ sub encode_base32hex {
 sub decode_09AV { return decode_base32hex(@_) }
 
 sub decode_base32hex {
-    my $arg = shift;
-    return '' unless defined($arg);    # mimic MIME::Base64
+    my $arg = uc(shift || '');    # mimic MIME::Base64
 
     $arg =~ tr|0-9A-V|\0-\37|;
     $arg = unpack('B*', $arg);
@@ -185,7 +183,7 @@ the issue is already reported.
 
 Please report any bugs or feature requests to
 C<bug-mime-base32 at rt.cpan.org>, or through the web interface at
-L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MIME-Base32>. 
+L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MIME-Base32>.
 I will be notified, and then you'll automatically be notified of progress
 on your bug as I make changes.
 
