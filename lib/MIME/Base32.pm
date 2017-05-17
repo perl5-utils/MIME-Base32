@@ -109,7 +109,7 @@ Prior to version 1.0, L<MIME::Base32> used the C<base32hex> (or C<[0-9A-V]>) enc
 decoding methods by default. If you need to maintain that behavior, please call
 C<encode_base32hex> or C<decode_base32hex> functions directly.
 
-Now, in accordance with L<RFC-3548, Section 6|https://tools.ietf.org/html/rfc3548#section-6>,
+Now, in accordance with L<RFC-3548, Section 5|https://tools.ietf.org/html/rfc3548#section-5>,
 L<MIME::Base32> uses the C<encode_base32> and C<decode_base32> functions by default.
 
 =head1 FUNCTIONS
@@ -224,6 +224,6 @@ modify it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<MIME::Base64>, L<RFC-3548|https://tools.ietf.org/html/rfc3548#section-6>
+L<MIME::Base64>, L<RFC-3548|https://tools.ietf.org/html/rfc3548#section-5>
 
 =cut

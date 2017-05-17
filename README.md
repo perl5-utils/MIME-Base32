@@ -20,7 +20,7 @@ Prior to version 1.0, [MIME::Base32](https://metacpan.org/pod/MIME::Base32) used
 decoding methods by default. If you need to maintain that behavior, please call
 `encode_base32hex` or `decode_base32hex` functions directly.
 
-Now, in accordance with [RFC-3548, Section 6](https://tools.ietf.org/html/rfc3548#section-6),
+Now, in accordance with [RFC-3548, Section 5](https://tools.ietf.org/html/rfc3548#section-5),
 [MIME::Base32](https://metacpan.org/pod/MIME::Base32) uses the `encode_base32` and `decode_base32` functions by default.
 
 # FUNCTIONS
@@ -131,4 +131,4 @@ modify it under the same terms as Perl itself.
 
 # SEE ALSO
 
-[MIME::Base64](https://metacpan.org/pod/MIME::Base64), [RFC-3548](https://tools.ietf.org/html/rfc3548#section-6)
+[MIME::Base64](https://metacpan.org/pod/MIME::Base64), [RFC-3548](https://tools.ietf.org/html/rfc3548#section-5)
