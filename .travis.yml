@@ -1,6 +1,14 @@
+---
+install:
+  - cpanm --notest --skip-satisfied App::mymeta_requires
+  - perl Makefile.PL
+  - make manifest
+  - mymeta-requires --runtime --build --test --configure --develop --recommends --suggests | cpanm
 language: perl
 perl:
+  - "5.24"
   - "5.22"
+  - "5.21"
   - "5.20-extras"
   - "5.20"
   - "5.18-extras"
@@ -9,8 +17,3 @@ perl:
   - "5.14"
   - "5.12"
   - "5.10"
-install:
-  - cpanm --notest --skip-satisfied App::mymeta_requires
-  - perl Makefile.PL
-  - make manifest
-  - mymeta-requires --runtime --build --test --configure --develop --recommends --suggests | cpanm --notest --skip-satisfied
