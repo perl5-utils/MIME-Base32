@@ -12,7 +12,7 @@ our @EXPORT_OK = qw(
     encode_base32hex decode_base32hex
 );
 
-our $VERSION = "1.302";
+our $VERSION = "1.303";
 $VERSION = eval $VERSION;
 
 sub encode         { return encode_base32(@_) }

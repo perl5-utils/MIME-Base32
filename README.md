@@ -94,7 +94,7 @@ the issue is already reported.
 
 Please report any bugs or feature requests to
 `bug-mime-base32 at rt.cpan.org`, or through the web interface at
-[https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MIME-Base32](https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MIME-Base32). 
+[https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MIME-Base32](https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MIME-Base32).
 I will be notified, and then you'll automatically be notified of progress
 on your bug as I make changes.
 
